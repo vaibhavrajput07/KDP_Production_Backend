@@ -44,6 +44,11 @@ app.use(session({
   },
 }));
 
+app.use((req, res, next) => {
+  console.log("🔍 Session User:", req.session.user);
+  next();
+});
+
 
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
