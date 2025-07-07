@@ -49,6 +49,13 @@ app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/members', teamMembers);
 
-mongoose.connect(process.env.MONGO_URI).then(() => {
-  app.listen(5000, () => console.log('Server running on http://localhost:5000'));
-}).catch((err)=>{console.log("MongoDB Error : " , err)});
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => {
+    const PORT = process.env.PORT || 5000; 
+    app.listen(PORT, '0.0.0.0', () => {
+      console.log(`✅ Server running on port ${PORT}`);
+    });
+  })
+  .catch((err) => {
+    console.error("MongoDB Connection Error:", err);
+  });
