@@ -12,10 +12,22 @@ const teamMembers =require('./routes/teamMembers');
 dotenv.config();
 const app = express();
 
-app.use(cors({ 
-  origin: 'https://kdp-production-frontend-7rwu.vercel.app/', 
-  credentials: true 
+const allowedOrigins = [
+  'https://kdp-production-frontend-7rwu.vercel.app',
+  'https://kdp-production-frontend-7rwu-mgfm2n73k.vercel.app'
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
 }));
+
 
 app.use(express.json());
 
