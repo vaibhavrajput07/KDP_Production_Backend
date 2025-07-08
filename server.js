@@ -13,8 +13,7 @@ dotenv.config();
 const app = express();
 
 const allowedOrigins = [
-  'https://kdp-production-frontend-7rwu.vercel.app',
-  'https://kdp-production-frontend-7rwu-mgfm2n73k.vercel.app'
+  'https://kdp-production-frontend-7rwu.vercel.app'
 ];
 
 app.use(cors({
@@ -30,6 +29,8 @@ app.use(cors({
 
 
 app.use(express.json());
+app.set('trust proxy', 1); // Trust first proxy
+
 
 app.use(session({
   secret: process.env.SESSION_SECRET,
