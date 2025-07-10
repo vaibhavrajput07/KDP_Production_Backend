@@ -8,11 +8,12 @@ const dotenv = require('dotenv');
 const authRoutes = require('./routes/auth');
 const productRoutes = require('./routes/product');
 const teamMembers =require('./routes/teamMembers');
-
+const contactUser= require('./routes/contact');
 dotenv.config();
 const app = express();
 
 const allowedOrigins = [
+  // 'http://localhost:5173',
   'https://kdp-production-frontend-7rwu.vercel.app'
 ];
 
@@ -54,6 +55,8 @@ app.use((req, res, next) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/members', teamMembers);
+app.use('/api/contacts',contactUser);
+
 
 mongoose.connect(process.env.MONGO_URI)
   .then(() => {
